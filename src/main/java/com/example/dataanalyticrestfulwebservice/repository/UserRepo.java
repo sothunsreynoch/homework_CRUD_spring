@@ -26,7 +26,6 @@ public interface UserRepo {
     @Result(property = "userId", column = "id")
     @Select("select  * from users_tb where id = #{id}")
     User findUserByID(int id );
-    int removeUser(int id );
 
 
     @Results({
@@ -70,8 +69,8 @@ public interface UserRepo {
             "    where user_id = #{id}")
     List<Account> findAccountsByUserId(int id);
 
-    @Delete("DELETE FROM users_tb WHERE userid = #{id}")
-    int removeAccountById(int id);
+    @Delete("DELETE FROM users_tb WHERE id = #{id}")
+    int removeUser(int id);
 
     @Update("update users_tb set username = #{user.username}, gender = #{user.gender}, " +
             "address =#{user.address} where id = #{id}")

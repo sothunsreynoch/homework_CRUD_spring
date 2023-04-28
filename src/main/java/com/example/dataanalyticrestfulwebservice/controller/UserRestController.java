@@ -53,7 +53,7 @@ public class UserRestController {
                     .setSuccess(false);
         }
     }
-    @GetMapping("/remove-user/{id}")
+    @DeleteMapping("/remove-user/{id}")
     public Response<User> removeUserAccount(@PathVariable("id") int id){
         try {
             int deletedRow = userService.removeUserById(id);
