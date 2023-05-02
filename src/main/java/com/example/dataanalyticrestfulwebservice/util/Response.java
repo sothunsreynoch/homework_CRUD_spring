@@ -60,4 +60,11 @@ public class Response <T> {
         response.setStatus(Status.EXCEPTION);
         return response;
     }
+    public static <T> Response <T> badRequest(){
+        Response<T> response = new Response<>();
+        response.setStatus(Status.BAD_REQUEST);
+        response.setSuccess(false);
+        return response;
+    }
 }
+
