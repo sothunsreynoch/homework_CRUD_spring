@@ -3,6 +3,7 @@ package com.example.dataanalyticrestfulwebservice.repository;
 import com.example.dataanalyticrestfulwebservice.model.Account;
 import com.example.dataanalyticrestfulwebservice.model.User;
 import com.example.dataanalyticrestfulwebservice.model.UserAccount;
+import com.example.dataanalyticrestfulwebservice.repository.provider.UserProvider;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -12,10 +13,11 @@ import java.util.List;
 public interface UserRepo {
 
 
-    @Select("select * from users_tb")
+//    @Select("select * from users_tb")
+//    @Result(column = "id", property = "userId")
     @Result(column = "id", property = "userId")
-
-    List<User> allUsers();
+    @SelectProvider(type = UserProvider.class, method = "getAllUsers")
+    List<User> allUsers(String filterName);
     List<User> findUserByUsername(String username);
     @Insert("insert into users_tb (username, gender, address)\n" +
             "values (#{user.username},#{user.gender}, #{user.address})")

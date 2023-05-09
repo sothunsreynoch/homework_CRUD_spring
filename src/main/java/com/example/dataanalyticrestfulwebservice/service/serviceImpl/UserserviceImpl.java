@@ -4,6 +4,8 @@ import com.example.dataanalyticrestfulwebservice.model.User;
 import com.example.dataanalyticrestfulwebservice.model.UserAccount;
 import com.example.dataanalyticrestfulwebservice.repository.UserRepo;
 import com.example.dataanalyticrestfulwebservice.service.UserService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +17,11 @@ public class UserserviceImpl implements UserService {
         this.userRepo = userRepo;
     }
     @Override
-    public List<User> allUsers() {
-        return userRepo.allUsers();
+    public PageInfo<User> allUsers(int page, int size, String filterName) {
+
+        PageHelper.startPage(page,size);
+        new PageInfo<>(userRepo.allUsers(filterName));
+        return new PageInfo<>(userRepo.allUsers(filterName)) ;
     }
 
     @Override

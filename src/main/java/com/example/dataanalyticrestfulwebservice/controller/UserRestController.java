@@ -4,8 +4,7 @@ import com.example.dataanalyticrestfulwebservice.model.User;
 import com.example.dataanalyticrestfulwebservice.model.UserAccount;
 import com.example.dataanalyticrestfulwebservice.service.UserService;
 import com.example.dataanalyticrestfulwebservice.util.Response;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +18,17 @@ public class UserRestController {
     }
 
     @GetMapping("/allUsers")
-    public List<User> getAllUsers(){
-        return userService.allUsers();
+    public Response<PageInfo<User>> getAllUsers(@RequestParam(defaultValue = "1")int page ,
+                                                @RequestParam(defaultValue = "5")int size,
+                                                @RequestParam(defaultValue = " ",required = false)String username){
+
+        try{
+            PageInfo<User> respose =userService.allUsers(page, size,username);
+            return Response.<PageInfo<User>>ok().setPayload(respose).setMessage("successfully");
+        }catch (Exception ex){
+            return Response.<PageInfo<User>>exception().setMessage("failed to retrieved");
+        }
+
     }
 
     @GetMapping("/{id}")

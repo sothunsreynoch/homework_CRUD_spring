@@ -1,0 +1,12 @@
+package com.example.dataanalyticrestfulwebservice.repository.provider;
+
+import org.apache.ibatis.jdbc.SQL;
+
+public class TransactionProvider {
+    public static String getTransactions(){
+        return new SQL(){{
+            SELECT("*");
+            FROM("transaction_tb");
+        }}.toString();
+    }
+}
