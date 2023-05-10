@@ -22,9 +22,9 @@ public interface TransactionRepo {
     List<Transaction> getAllTransactions();
 
 
-    @Select("select account_no, account_id, ut.* from user_account_tb\n" +
-            "           inner join users_tb ut on ut.id = user_account_tb.user_id\n" +
-            "            inner join account_tb a on a.id = user_account_tb.account_id\n" +
+    @Select("select account_no, account_id, ut.* from useraccount_tb\n" +
+            "           inner join users_tb ut on ut.id = useraccount_tb.user_id\n" +
+            "            inner join account_tb a on a.id = useraccount_tb.account_id\n" +
             "           where account_id = #{id}")
     @Results(value = {
             @Result(property ="accountId", column ="account_id"),

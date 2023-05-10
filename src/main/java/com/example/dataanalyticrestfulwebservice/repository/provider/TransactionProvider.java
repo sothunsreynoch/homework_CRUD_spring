@@ -6,7 +6,7 @@ public class TransactionProvider {
     public static String getTransactions(){
         return new SQL(){{
             SELECT("*");
-            FROM("transaction_tb");
+            FROM("transactions_tb");
         }}.toString();
     }
 }

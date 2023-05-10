@@ -19,7 +19,7 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
     @GetMapping("/all-transactions")
-    public Response<List<Transaction>> getAllTransaction(){
+    public Response<List<Transaction>> getAllTransactions(){
        List<Transaction> transactions = transactionService.getAllTransactions();
         return Response.<List<Transaction>>ok().setPayload(transactions)
                 .setMessage("Successfully retrieved all the transaction..!");
